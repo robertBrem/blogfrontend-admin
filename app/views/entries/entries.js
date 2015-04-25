@@ -59,7 +59,7 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
     $scope.update = function (entry) {
         entry.content = $scope.toHTML(entry.content);
 
-        $http.put(ENTRY_URL + $routeParams.id,
+        $http.post(ENTRY_URL + $routeParams.id,
             entry)
             .then(function (response) {
                 $scope.created = response.data;
