@@ -35,6 +35,7 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
     } else {
         $scope.current = {};
         $scope.current.creationDate = new Date();
+        $scope.current.keywords = [];
     }
 
     $scope.toHTML = function (content) {
