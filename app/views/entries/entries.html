@@ -1,0 +1,92 @@
+<div class="col-sm-6" ng-controller="EntriesCtrl">
+
+    <div>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-click="clear()" class="btn btn-primary">Felder leeren <span
+                        class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="choseEntry" class="col-sm-2 control-label">Eintrag</label>
+
+            <div class="dropdown col-sm-10">
+                <button class="btn btn-default dropdown" type="button" id="choseEntry"
+                        data-toggle="dropdown"
+                        aria-expanded="true">
+                    {{current.title}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li role="presentation" ng-repeat="current in entries | orderBy:'-creationDate'">
+                        <a ng-click="choose(current)" href="#/entries/{{current.id}}">{{current.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAuthor" class="col-sm-2 control-label">Autor</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputAuthor" placeholder="Verfasser des Eintrags"
+                       ng-model="current.author"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTitle" class="col-sm-2 control-label">Titel</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputTitle" placeholder="Überschrift des Eintrags"
+                       ng-model="current.title"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTeaser" class="col-sm-2 control-label">Anrisstext</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="2" id="inputTeaser"
+                          placeholder="Kurzer Einführungstext, der in der Vorschau erscheint"
+                          ng-model="current.teaser"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputContent" class="col-sm-2 control-label">Inhalt</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="4" id="inputContent"
+                          placeholder="Der gesamte Text!" ng-model="current.content"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-click="update(current)" class="btn btn-primary">Eintrag Aktualisieren <span
+                        class="glyphicon glyphicon-chevron-right"></span></button>
+                <button type="submit" ng-click="create(current)" class="btn btn-primary">Neuer Eintrag erstellen <span
+                        class="glyphicon glyphicon-chevron-right"></span></button>
+                <button type="submit" ng-click="delete(current.id)" class="btn btn-primary">Eintrag löschen <span
+                        class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </div>
+
+        <div class="well">
+            <h1>{{current.title}}</h1>
+
+            <p class="lead">
+                von <a href="mailto:info@bachsanierung.ch">{{current.author}}</a>
+            </p>
+            <hr>
+            <p>
+                <span class="glyphicon glyphicon-time"></span> {{current.creationDate | date : "dd.MM.yyyy 'um' HH:mm"}}
+            </p>
+            <hr>
+            <p class="lead">{{current.teaser}}</p>
+
+            <div ng-bind-html="toHTML(current.content)"></div>
+        </div>
+    </form>
+</div>

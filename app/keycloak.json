@@ -1,0 +1,8 @@
+{
+  "realm": "Optimist-Website",
+  "realm-public-key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCn5h0itJJ90BQWIt4uR+PHNlOJiKVBexhcIPQQc85kPmMJSUHMMo5yJefX+J+mRjXwu1DtW1aszo8dBbS7PMnZDFApO70CUKAtq/bQqHcmBEDMI31E2UOxceXis4Vx7DxsC4yHw6u+0NUETN8Rv6wD741kL30jmlDwIWdGNJSDEwIDAQAB",
+  "auth-server-url": "http://168.235.154.116:8090/auth",
+  "ssl-required": "none",
+  "resource": "Blog-Frontend-Admin",
+  "public-client": true
+}
