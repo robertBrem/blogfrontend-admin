@@ -44,6 +44,10 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
         return content.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
+    $scope.addKeyword = function (text) {
+        $scope.current.keywords.push(text);
+    };
+
     $scope.create = function (entry) {
         entry.content = $scope.toHTML(entry.content);
         entry.creationDate = undefined;
