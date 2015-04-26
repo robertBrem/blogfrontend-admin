@@ -2,7 +2,8 @@
 
 var myApp = angular.module('myApp', [
     'ngRoute',
-    'myApp.entries'
+    'myApp.entries',
+    'myApp.comments'
 ]);
 
 myApp.config(['$routeProvider', function ($routeProvider) {

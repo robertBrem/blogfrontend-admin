@@ -1,0 +1,104 @@
+<div class="col-sm-6" ng-controller="CommentsCtrl">
+
+    <div>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-click="clear()" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    &nbsp;Clear all
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="choseEntry" class="col-sm-2 control-label">Entry</label>
+
+            <div class="dropdown col-sm-10">
+                <button class="btn btn-primary dropdown"
+                        type="button"
+                        id="choseEntry"
+                        data-toggle="dropdown"
+                        aria-expanded="true">
+                    {{currentEntry.title}}
+                    &nbsp;<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li role="presentation" ng-repeat="entry in entries | orderBy:'-creationDate'">
+                        <a href="#/entries/{{entry.id}}/comments">{{entry.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="choseComment" class="col-sm-2 control-label">Comments</label>
+
+            <div class="dropdown col-sm-10">
+                <button class="btn btn-primary dropdown"
+                        type="button"
+                        id="choseComment"
+                        data-toggle="dropdown"
+                        aria-expanded="true">
+                    {{current.creationDate | date:"dd.MM.yyyy 'um' HH:mm"}}
+                    &nbsp;<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li role="presentation" ng-repeat="comment in currentEntry.comments | orderBy:'-creationDate'">
+                        <a href="#/entries/{{currentEntry.id}}/comments/{{comment.id}}">
+                            {{ comment.creationDate | date:"dd.MM.yyyy 'um' HH:mm" }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAuthor" class="col-sm-2 control-label">Autor</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputAuthor" placeholder="Verfasser des Kommentars"
+                       ng-model="current.author"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputContent" class="col-sm-2 control-label">Inhalt</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="2" id="inputContent"
+                          placeholder="Der eigentliche Kommentar"
+                          ng-model="current.content"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-click="update(current)" class="btn btn-primary">
+                    <span class="glyphicon glyphicon glyphicon-refresh"></span>
+                    &nbsp;Update Comment
+                </button>
+                <button type="submit" ng-click="delete(current.id)" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    &nbsp;Delete comment
+                </button>
+            </div>
+        </div>
+
+        <div class="well media">
+            <span class="pull-left">
+                <img class="media-object" src="http://placehold.it/64x64" alt="avatar">
+            </span>
+
+
+            <div class="media-body">
+                <h4 class="media-heading">{{current.author}}
+                    <small>{{current.creationDate | date:"'erstellt am' dd.MM.yyyy 'um' HH:mm"}}
+                    </small>
+                </h4>
+                {{current.content}}
+            </div>
+        </div>
+    </form>
+</div>
