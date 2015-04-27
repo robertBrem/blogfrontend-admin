@@ -55,7 +55,7 @@ entriesApp.controller('CommentsCtrl', function ($scope, $http, $routeParams, $lo
     }
 
     $scope.update = function (comment) {
-        $http.put(COMMENT_URL + $routeParams.id,
+        $http.post(COMMENT_URL + $routeParams.id,
             comment)
             .then(function (response) {
                 $scope.created = response.data;
