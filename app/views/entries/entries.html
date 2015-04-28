@@ -25,7 +25,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li role="presentation" ng-repeat="current in entries | orderBy:'-creationDate'">
-                        <a ng-click="choose(current)" href="#/entries/{{current.id}}">{{current.title}}</a>
+                        <a ng-click="choose(current)" href="#/entries/{{ current.urlTitle }}">{{current.title}}</a>
                     </li>
                 </ul>
             </div>

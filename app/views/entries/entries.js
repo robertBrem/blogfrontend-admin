@@ -3,7 +3,7 @@
 var entriesApp = angular.module('myApp.entries', ['ngRoute', 'ui.bootstrap.alert', 'ngSanitize', 'configuration']);
 
 entriesApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/entries/:id', {
+    $routeProvider.when('/entries/:urlTitle', {
         templateUrl: 'views/entries/entries.html',
         controller: 'EntriesCtrl'
     }).when('/entries', {
@@ -24,8 +24,8 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
         $scope.entries = response.data;
     });
 
-    if ($routeParams.id) {
-        $http.get(ENTRY_URL + $routeParams.id).
+    if ($routeParams.urlTitle) {
+        $http.get(ENTRY_URL + $routeParams.urlTitle).
             success(function (data) {
                 $scope.current = data;
             }).
@@ -64,8 +64,7 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
     $scope.update = function (entry) {
         entry.content = $scope.toHTML(entry.content);
 
-        $http.post(ENTRY_URL + $routeParams.id,
-            entry)
+        $http.post(ENTRY_URL + entry.id, entry)
             .then(function (response) {
                 $scope.created = response.data;
                 $scope.alerts.push({

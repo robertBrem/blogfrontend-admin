@@ -28,7 +28,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li role="presentation" ng-repeat="entry in entries | orderBy:'-creationDate'">
-                        <a href="#/entries/{{entry.id}}/comments">{{entry.title}}</a>
+                        <a href="#/entries/{{ entry.urlTitle }}/comments">{{entry.title}}</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +48,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li role="presentation" ng-repeat="comment in currentEntry.comments | orderBy:'-creationDate'">
-                        <a href="#/entries/{{currentEntry.id}}/comments/{{comment.id}}">
+                        <a href="#/entries/{{ currentEntry.urlTitle }}/comments/{{ comment.urlTitle }}">
                             {{ comment.urlTitle }}
                         </a>
                     </li>

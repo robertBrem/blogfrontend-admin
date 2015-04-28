@@ -3,16 +3,16 @@
 var entriesApp = angular.module('myApp.comments', ['ngRoute', 'ui.bootstrap.alert', 'ngSanitize', 'configuration']);
 
 entriesApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/comments/:id', {
+    $routeProvider.when('/comments/:commentUrlTitle', {
         templateUrl: 'views/comments/comments.html',
         controller: 'CommentsCtrl'
     }).when('/comments', {
         templateUrl: 'views/comments/comments.html',
         controller: 'CommentsCtrl'
-    }).when('/entries/:entryId/comments', {
+    }).when('/entries/:entryUrlTitle/comments', {
         templateUrl: 'views/comments/comments.html',
         controller: 'CommentsCtrl'
-    }).when('/entries/:entryId/comments/:id', {
+    }).when('/entries/:entryUrlTitle/comments/:commentUrlTitle', {
         templateUrl: 'views/comments/comments.html',
         controller: 'CommentsCtrl'
     });
@@ -30,8 +30,8 @@ entriesApp.controller('CommentsCtrl', function ($scope, $http, $routeParams, $lo
         $scope.entries = response.data;
     });
 
-    if ($routeParams.id) {
-        $http.get(COMMENT_URL + $routeParams.id).
+    if ($routeParams.commentUrlTitle) {
+        $http.get(COMMENT_URL + $routeParams.commentUrlTitle).
             success(function (data) {
                 $scope.current = data;
             }).
@@ -42,8 +42,8 @@ entriesApp.controller('CommentsCtrl', function ($scope, $http, $routeParams, $lo
         $scope.current = {};
     }
 
-    if ($routeParams.entryId) {
-        $http.get(ENTRY_URL + $routeParams.entryId).
+    if ($routeParams.entryUrlTitle) {
+        $http.get(ENTRY_URL + $routeParams.entryUrlTitle).
             success(function (data) {
                 $scope.currentEntry = data;
             }).
@@ -55,8 +55,7 @@ entriesApp.controller('CommentsCtrl', function ($scope, $http, $routeParams, $lo
     }
 
     $scope.update = function (comment) {
-        $http.post(COMMENT_URL + $routeParams.id,
-            comment)
+        $http.post(COMMENT_URL + comment.id, comment)
             .then(function (response) {
                 $scope.created = response.data;
                 $scope.alerts.push({
