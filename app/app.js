@@ -2,6 +2,7 @@
 
 var myApp = angular.module('myApp', [
     'ngRoute',
+    'hljs',
     'myApp.entries',
     'myApp.comments'
 ]);
@@ -10,6 +11,13 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .otherwise({redirectTo: '/entries'});
 }]);
+
+myApp.config(function (hljsServiceProvider) {
+    hljsServiceProvider.setOptions({
+        // replace tab with 4 spaces
+        tabReplace: '    '
+    });
+});
 
 myApp.config(function ($provide) {
     var directives = [

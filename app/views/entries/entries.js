@@ -1,6 +1,6 @@
 'use strict';
 
-var entriesApp = angular.module('myApp.entries', ['ngRoute', 'ui.bootstrap.alert', 'ngSanitize', 'configuration']);
+var entriesApp = angular.module('myApp.entries', ['ngRoute', 'ui.bootstrap.alert', 'hljs', 'ngSanitize', 'configuration']);
 
 entriesApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/entries/:urlTitle', {
@@ -39,10 +39,11 @@ entriesApp.controller('EntriesCtrl', function ($scope, $http, $routeParams, $loc
     }
 
     $scope.toHTML = function (content) {
-        if (!content) {
-            return '';
-        }
-        return content.replace(/(?:\r\n|\r|\n)/g, '<br />');
+        return content;
+        //if (!content) {
+        //    return '';
+        //}
+        //return content.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
     $scope.addKeyword = function (text) {
